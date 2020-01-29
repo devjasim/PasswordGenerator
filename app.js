@@ -32,6 +32,23 @@ generate.addEventListener('click', () => {
     );
 });
 
+// Copy to clipboard
+clipboardEl.addEventListener('click', () => {
+    const textarea = document.createElement('textarea');
+    const password = resultEl.innerText;
+
+    if(!password) {
+        return
+    }
+
+    textarea.value = password;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
+    alert('Password copied to clipboard!');
+})
+
 //Generate password function 
 function generatePassword(lower, upper, number, symbol, length){
     // 1. Init pw var
@@ -85,4 +102,17 @@ function getRandomSymbol() {
     const symbols = '!@#$%^&*(){}[]=<>/,.';
     return symbols[Math.floor(Math.random() * symbols.length)];
 }
+
+// SOCIAL PANEL JS
+const floating_btn = document.querySelector('.floating-btn');
+const close_btn = document.querySelector('.close-btn');
+const social_panel_container = document.querySelector('.social-panel-container');
+
+floating_btn.addEventListener('click', () => {
+	social_panel_container.classList.toggle('visible');
+});
+
+close_btn.addEventListener('click', () => {
+	social_panel_container.classList.remove('visible');
+});
 
